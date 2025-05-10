@@ -1116,6 +1116,9 @@
                 const netProfit = profit - constructionCost;
                 const egoGain = approvalGain + netProfit;
                 stats.ego = Math.min(maxStats.ego, stats.ego + egoGain);
+
+                //aumenta il sospetto fiscale: l'aumento del sospetto coincide con la diminuizione di TaxSuspicion (ho chiamato male la variabile)
+                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion - 5);
                 
                 addMessage(`AFFARE D'ORO! Costruzione costata ${constructionCost}, guadagno di ${profit}! Popolarità +${approvalGain}, Ego +${egoGain}.`, "success");
             } else {
@@ -1150,9 +1153,11 @@
             if (outcome < 0.1) { // 10% Super Successo
                 wealthChange = 100 + Math.floor(Math.random() * 151); // +100 a +250
                 message = `CRIPTOMANIA! La tua valuta è TO THE MOON! Ricchezza +${wealthChange}!`;
+                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion -10);
             } else if (outcome < 0.4) { // 30% Successo Moderato
                 wealthChange = 20 + Math.floor(Math.random() * 31);  // +20 a +50
                 message = `Investimento Cripto riuscito! Ricchezza +${wealthChange}.`;
+                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion -5);
             } else if (outcome < 0.7) { // 30% Perdita Piccola
                 wealthChange = -(10 + Math.floor(Math.random() * 11)); // -10 a -20
                 message = `Fluttuazioni di mercato Cripto... Ricchezza ${wealthChange}.`;
@@ -1172,16 +1177,16 @@
             if (stats.wealth < taxAmount && stats.wealth > 0) { // Non abbastanza per pagare tutto ma ha qualcosa
                  addMessage(`Vuoi pagare ${taxAmount} di tasse, ma hai solo ${stats.wealth}. Paghi tutto.`, "action");
                  stats.wealth = 0;
-                 stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 15);
+                 stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 5);
             } else if (stats.wealth <= 0) {
                 addMessage("Non hai soldi per pagare le tasse!", "error");
                 return;
             } else {
                 stats.wealth -= taxAmount;
-                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 30); // Pagare le tasse aumenta la fiducia 
-                addMessage(`Tasse PAGATE: ${taxAmount}. Il fisco è (per ora) contento. Sospetto Fisco +30.`, "success");
+                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 15); // Pagare le tasse aumenta la fiducia 
+                addMessage(`Tasse PAGATE: ${taxAmount}. Il fisco è (per ora) contento. Fiducia del Fisco +15.`, "success");
             }
-            stats.approval = Math.max(minStats.approval, stats.approval - 2); // La gente non ama chi paga le tasse? O forse sì?
+            stats.approval = Math.max(minStats.approval, stats.approval + 2); // La gente apprezza chi paga le tasse!
             playTrumpActionAnimation(); updateUI(); updateModelAppearance();
         }
         
