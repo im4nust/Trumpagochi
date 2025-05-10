@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,30 +13,30 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow-x: hidden; 
+            overflow-x: hidden;
         }
         body {
-            font-family: 'Arial', sans-serif; 
+            font-family: 'Arial', sans-serif;
         }
         .game-title {
             font-family: 'Press Start 2P', cursive;
         }
         #canvas-wrapper {
-            position: relative; 
-            display: flex; 
+            position: relative;
+            display: flex;
             flex-direction: column;
-            min-height: 400px; 
-            background-color: #374151; 
+            min-height: 400px;
+            background-color: #374151;
         }
         #canvas-container {
             display: block;
-            flex-grow: 1; 
-            position: absolute; 
+            flex-grow: 1;
+            position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            bottom: 0; 
-            overflow: hidden; 
+            bottom: 0;
+            overflow: hidden;
         }
         #canvas-container canvas {
             display: block;
@@ -49,20 +49,20 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain; /* o 'cover' a seconda dell'effetto desiderato */
-            z-index: 50; /* Sopra il canvas, sotto il messaggio di game over se necessario */
+            object-fit: contain; /* or 'cover' depending on the desired effect */
+            z-index: 50; /* Above canvas, below game over message if necessary */
         }
         #start-game-button {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 10; 
+            z-index: 10;
             padding: 15px 30px;
             font-size: 1.2rem;
             font-weight: bold;
             color: white;
-            background-color: #f59e0b; 
+            background-color: #f59e0b;
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -70,7 +70,7 @@
             transition: background-color 0.3s ease;
         }
         #start-game-button:hover {
-            background-color: #d97706; 
+            background-color: #d97706;
         }
         .action-button {
             transition: all 0.2s ease-in-out;
@@ -84,7 +84,7 @@
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
         .progress-bar-bg {
-            background-color: #4a5568; 
+            background-color: #4a5568;
         }
         .progress-bar-fill {
             transition: width 0.5s ease-in-out;
@@ -104,16 +104,16 @@
             border-radius: 8px;
             text-align: center;
             font-size: 1.5rem;
-            z-index: 100; 
-            display: none; 
+            z-index: 100;
+            display: none;
         }
         #reset-game {
-            background-color: #ef4444 !important; 
+            background-color: #ef4444 !important;
             position: fixed;
             bottom: 20px;
             right: 20px;
             z-index: 1000;
-            display: none; 
+            display: none;
             padding: 10px 20px;
             font-size: 1rem;
             font-weight: bold;
@@ -125,17 +125,17 @@
             transition: background-color 0.3s ease;
         }
         #reset-game:hover {
-            background-color: #dc2626 !important; 
+            background-color: #dc2626 !important;
         }
-         #age-display { 
+         #age-display {
             font-size: 1.1em;
-            color: #cbd5e1; 
+            color: #cbd5e1;
             margin-top: 8px;
             text-align: center;
          }
          #age-display span {
              font-weight: bold;
-             color: #fcd34d; 
+             color: #fcd34d;
          }
     </style>
 </head>
@@ -151,25 +151,25 @@
 
         <div id="canvas-wrapper" class="lg:w-2/3 w-full relative rounded-lg shadow-xl bg-gray-800 border-2 border-yellow-500">
             <div id="canvas-container"></div>
-            <img id="arrested-image" src="https://placehold.co/600x400/111827/FFFFFF?text=ARRESTATO" alt="Arrestato" class="hidden">
-            <button id="start-game-button">Avvia Gioco</button>
+            <img id="arrested-image" src="https://placehold.co/600x400/111827/FFFFFF?text=ARRESTATO" alt="Arrested" class="hidden">
+            <button id="start-game-button">Start Game</button>
             <div id="game-over-message" class="bg-red-600 text-white"></div>
         </div>
 
-        <div id="ui-container" class="lg:w-1/3 w-full bg-gray-800 p-4 md:p-6 rounded-lg shadow-xl border-2 border-yellow-500 flex flex-col gap-3"> 
+        <div id="ui-container" class="lg:w-1/3 w-full bg-gray-800 p-4 md:p-6 rounded-lg shadow-xl border-2 border-yellow-500 flex flex-col gap-3">
             <div id="stats-display" class="space-y-2">
                 <div>
                     <div class="flex justify-between mb-1">
                         <span class="text-base font-medium text-yellow-400">Ego</span>
                         <span id="ego-value" class="text-sm font-medium text-yellow-400">50/100</span>
                     </div>
-                    <div class="w-full progress-bar-bg rounded-full h-3"> 
+                    <div class="w-full progress-bar-bg rounded-full h-3">
                         <div id="ego-progress" class="ego-fill h-3 rounded-full" style="width: 50%"></div>
                     </div>
                 </div>
                 <div>
                     <div class="flex justify-between mb-1">
-                        <span class="text-base font-medium text-blue-400">Popolarità</span>
+                        <span class="text-base font-medium text-blue-400">Approval</span>
                         <span id="approval-value" class="text-sm font-medium text-blue-400">50/100</span>
                     </div>
                     <div class="w-full progress-bar-bg rounded-full h-3">
@@ -178,7 +178,7 @@
                 </div>
                 <div>
                     <div class="flex justify-between mb-1">
-                        <span class="text-base font-medium text-green-400">Ricchezza ($)</span>
+                        <span class="text-base font-medium text-green-400">Wealth ($)</span>
                         <span id="wealth-value" class="text-sm font-medium text-green-400">100</span>
                     </div>
                     <div class="w-full progress-bar-bg rounded-full h-3">
@@ -187,16 +187,16 @@
                 </div>
                 <div>
                     <div class="flex justify-between mb-1">
-                        <span class="text-base font-medium text-purple-400">Rapporti Internazionali</span>
+                        <span class="text-base font-medium text-purple-400">International Relations</span>
                         <span id="relations-value" class="text-sm font-medium text-purple-400">70/100</span>
                     </div>
                     <div class="w-full progress-bar-bg rounded-full h-3">
                         <div id="relations-progress" class="relations-fill h-3 rounded-full" style="width: 70%"></div>
                     </div>
-                </div>                
+                </div>
                 <div>
                     <div class="flex justify-between mb-1">
-                        <span class="text-base font-medium text-pink-400">Fiducia Fisco</span>
+                        <span class="text-base font-medium text-pink-400">Tax Confidence</span>
                         <span id="tax-value" class="text-sm font-medium text-pink-400">100/100</span>
                     </div>
                     <div class="w-full progress-bar-bg rounded-full h-3">
@@ -205,23 +205,23 @@
                 </div>
             </div>
 
-            <div id="age-display">Età: <span>0</span> (Uovo)</div>
+            <div id="age-display">Age: <span>0</span> (Egg)</div>
 
-            <div id="actions" class="grid grid-cols-2 gap-2">  
-                <button id="impose-tariffs" class="action-button bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-3 rounded shadow text-sm">Imponi i Dazi</button>
-                <button id="tweet-storm" class="action-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Tweet Esplosivo</button>
-                <button id="hold-rally" class="action-button bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Comizio</button> 
-                <button id="play-golf" class="action-button bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-3 rounded shadow text-sm">Gioca a Golf</button>
-                <button id="criticize-media" class="action-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-3 rounded shadow text-sm">Attacca i Media</button> 
-                <button id="build-something" class="action-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Costruisci Palazzi</button>                  
-                <button id="create-crypto" class="action-button bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Investi in Criptovaluta</button>
-                <button id="pay-taxes" class="action-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Paga le Tasse</button>
+            <div id="actions" class="grid grid-cols-2 gap-2">
+                <button id="impose-tariffs" class="action-button bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-3 rounded shadow text-sm">Impose Tariffs</button>
+                <button id="tweet-storm" class="action-button bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Tweet Storm</button>
+                <button id="hold-rally" class="action-button bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Hold Rally</button>
+                <button id="play-golf" class="action-button bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-3 rounded shadow text-sm">Play Golf</button>
+                <button id="criticize-media" class="action-button bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-3 rounded shadow text-sm">Criticize Media</button>
+                <button id="build-something" class="action-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Build Buildings</button>
+                <button id="create-crypto" class="action-button bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Invest in Crypto</button>
+                <button id="pay-taxes" class="action-button bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-3 rounded shadow text-sm">Pay Taxes</button>
             </div>
-            <button id="reset-game" class="action-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow mt-2" style="display: none;">Ricomincia Partita</button>
+            <button id="reset-game" class="action-button bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded shadow mt-2" style="display: none;">Restart Game</button>
 
             <div class="mt-auto">
-                <h3 class="text-lg font-semibold mb-1 text-gray-300">Log Messaggi:</h3>
-                <div id="message-log" class="h-28 bg-gray-900 p-2 rounded overflow-y-auto flex flex-col-reverse border border-gray-700 text-xs"> 
+                <h3 class="text-lg font-semibold mb-1 text-gray-300">Message Log:</h3>
+                <div id="message-log" class="h-28 bg-gray-900 p-2 rounded overflow-y-auto flex flex-col-reverse border border-gray-700 text-xs">
                 </div>
             </div>
         </div>
@@ -230,74 +230,74 @@
     <script>
         // Three.js variables
         let scene, camera, renderer;
-        let trumpModel; 
-        let idleAnimation = true; 
-        let hairBounce = 0; 
-        let bounceDirection = 1; 
+        let trumpModel;
+        let idleAnimation = true;
+        let hairBounce = 0;
+        let bounceDirection = 1;
 
-        let canvasContainer; 
+        let canvasContainer;
         let arrestedImageUI;
 
         // Game state
-        let stats = { 
-            ego: 10, 
-            approval: 50, 
-            wealth: 100, 
+        let stats = {
+            ego: 10,
+            approval: 50,
+            wealth: 100,
             age: 0,
-            internationalRelations: 80, 
-            taxSuspicion: 50          
-        }; 
-        const maxStats = { 
-            ego: 100, 
-            approval: 100, 
-            wealth: 1000, 
+            internationalRelations: 80,
+            taxSuspicion: 50
+        };
+        const maxStats = {
+            ego: 100,
+            approval: 100,
+            wealth: 1000,
             internationalRelations: 100,
             taxSuspicion: 100
-        }; 
-        const minStats = { 
-            ego: 0, 
-            approval: 0, 
-            wealth: 0, // Può andare in bancarotta
+        };
+        const minStats = {
+            ego: 0,
+            approval: 0,
+            wealth: 0, // Can go bankrupt
             internationalRelations: 0,
             taxSuspicion: 0
         };
         let gameOver = false;
-        let gameStarted = false; 
+        let gameStarted = false;
         let lastUpdateTime = Date.now();
         let lastModelAppearanceUpdateTime = Date.now();
-        const modelAppearanceUpdateInterval = 2000; // ms, aggiorna l'aspetto del modello ogni 0.5s : aggiornato a 2s
+        const modelAppearanceUpdateInterval = 2000; // ms, update model appearance every 2s
 
-        const EGO_DECAY_RATE = 0.2; 
-        const APPROVAL_DECAY_RATE = 0.25; 
-        const WEALTH_DECAY_RATE = 0.1; 
-        const RELATIONS_DECAY_RATE = 0.1; // Leggero decadimento naturale dei rapporti
-        const TAX_SUSPICION_DECAY_RATE = 0.5; // Il sospetto aumenta (la barra scende) nel tempo
+        const EGO_DECAY_RATE = 0.2;
+        const APPROVAL_DECAY_RATE = 0.25;
+        const WEALTH_DECAY_RATE = 0.1;
+        const RELATIONS_DECAY_RATE = 0.1; // Slight natural decay of relations
+        const TAX_SUSPICION_DECAY_RATE = 0.5; // Suspicion increases (bar goes down) over time
 
         // Evolution variables
-        const ageInterval = 10000; // Età aumenta ogni 15 secondi per test più rapidi - modificato in 60s
+        const ageInterval = 10000; // Age increases every 10 seconds
         let lastAgeUpdateTime = Date.now();
-        let currentStage = 'egg'; 
-        const evolutionThresholds = { 
-            boy: 10, 
-            adult: 24, 
-            old: 59, 
-            god: 100 
+        let currentStage = 'egg';
+        const evolutionThresholds = {
+            boy: 10,
+            adult: 24,
+            old: 59,
+            god: 100
         };
-        const ARREST_MIN_AGE = 40; // Età minima per l'arresto (verrà usata quella reale, es. 40)
+        const ARREST_MIN_AGE = 40; // Minimum age for arrest (real age will be used, e.g., 40)
 
-        // Material Constants 
+        // Material Constants
         const EGG_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xfff5e1, roughness: 0.6, metalness: 0.1 });
-        const SKIN_MATERIAL_BABY = new THREE.MeshStandardMaterial({ color: 0xfddeae, roughness: 0.5 }); 
-        const PACIFIER_MATERIAL_BODY = new THREE.MeshStandardMaterial({ color: 0x008080, roughness: 0.4 }); 
+        const SKIN_MATERIAL_BABY = new THREE.MeshStandardMaterial({ color: 0xfddeae, roughness: 0.5 });
+        const PACIFIER_MATERIAL_BODY = new THREE.MeshStandardMaterial({ color: 0x008080, roughness: 0.4 });
         const PACIFIER_MATERIAL_HANDLE = new THREE.MeshStandardMaterial({ color: 0x00CED1, roughness: 0.4 });
-        const SKIN_MATERIAL_BOY = new THREE.MeshStandardMaterial({ color: 0xf0c090, roughness: 0.5 }); 
+        const SKIN_MATERIAL_BOY = new THREE.MeshStandardMaterial({ color: 0xf0c090, roughness: 0.5 });
         const SKIN_MATERIAL_ADULT = new THREE.MeshStandardMaterial({ color: 0xfad0a0, roughness: 0.5 });
         const SKIN_MATERIAL_OLD = new THREE.MeshStandardMaterial({ color: 0xe0c0b0, roughness: 0.6 });
-        const SKIN_MATERIAL_GOD = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffff00, emissiveIntensity: 0.5, roughness: 0.1 }); 
+        const SKIN_MATERIAL_GOD = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffff00, emissiveIntensity: 0.5, roughness: 0.1 });
         const DIAPER_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xf8f8f8, roughness: 0.8 });
         const HAIR_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xffe030, roughness: 0.4, flatShading:false });
-        const SUIT_MATERIAL = new THREE.MeshStandardMaterial({ color: 0x1a237e, roughness: 0.7 }); 
-        const TIE_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xc62828, roughness: 0.5 });  
+        const SUIT_MATERIAL = new THREE.MeshStandardMaterial({ color: 0x1a237e, roughness: 0.7 });
+        const TIE_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xc62828, roughness: 0.5 });
         const SHIRT_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xffffff, roughness: 0.8 });
         const TOMBSTONE_MATERIAL = new THREE.MeshStandardMaterial({ color: 0x546e7a, roughness: 0.6, metalness: 0.2 });
         const TOMBSTONE_TOP_MATERIAL = new THREE.MeshStandardMaterial({ color: 0xffc107, roughness: 0.3, metalness: 0.6 });
@@ -324,9 +324,9 @@
             actionButtons = document.querySelectorAll('#actions button'); // Selects all buttons within #actions div
             gameOverMessageUI = document.getElementById('game-over-message');
             resetGameButton = document.getElementById('reset-game');
-            ageDisplayUI = document.getElementById('age-display').querySelector('span'); 
-            ageStageUI = document.getElementById('age-display'); 
-            startGameButton = document.getElementById('start-game-button'); 
+            ageDisplayUI = document.getElementById('age-display').querySelector('span');
+            ageStageUI = document.getElementById('age-display');
+            startGameButton = document.getElementById('start-game-button');
             arrestedImageUI = document.getElementById('arrested-image');
         }
 
@@ -335,29 +335,29 @@
             console.log("Initializing game...");
             cacheDOMElements();
             canvasContainer = document.getElementById('canvas-container');
-            
-            stats = { 
+
+            stats = {
                 ego: 50, approval: 50, wealth: 100, age: 0,
                 internationalRelations: 50, taxSuspicion: 50
             };
             gameOver = false;
-            gameStarted = false; 
+            gameStarted = false;
             if(arrestedImageUI) arrestedImageUI.classList.add('hidden');
             if(canvasContainer) canvasContainer.style.display = 'block';
 
 
             gameOverMessageUI.style.display = 'none';
             resetGameButton.style.display = 'none';
-            startGameButton.style.display = 'block'; 
-            enableActionButtons(false); 
+            startGameButton.style.display = 'block';
+            enableActionButtons(false);
 
             scene = new THREE.Scene();
-            scene.background = new THREE.Color(0x6B7280); 
+            scene.background = new THREE.Color(0x6B7280);
 
             camera = new THREE.PerspectiveCamera(75, canvasContainer.clientWidth / canvasContainer.clientHeight, 0.1, 1000);
-            camera.position.set(0, 1.2, 3.5); 
-            camera.lookAt(0, 0.2, 0); 
-            
+            camera.position.set(0, 1.2, 3.5);
+            camera.lookAt(0, 0.2, 0);
+
             if (renderer) { // If renderer exists from a previous game, dispose it
                 renderer.dispose();
                 // Remove old canvas if it's still there
@@ -368,34 +368,34 @@
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
             renderer.setPixelRatio(window.devicePixelRatio);
-            renderer.shadowMap.enabled = true; 
-            canvasContainer.appendChild(renderer.domElement); 
-            
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8); 
+            renderer.shadowMap.enabled = true;
+            canvasContainer.appendChild(renderer.domElement);
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
             scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0); 
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
             directionalLight.position.set(5, 10, 7.5);
-            directionalLight.castShadow = true; 
-            directionalLight.shadow.mapSize.width = 1024; 
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 1024;
             directionalLight.shadow.mapSize.height = 1024;
             scene.add(directionalLight);
-            
+
             const planeGeometry = new THREE.PlaneGeometry(20, 20);
-            const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x4B5563 }); 
+            const planeMaterial = new THREE.MeshStandardMaterial({ color: 0x4B5563 });
             const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-            plane.rotation.x = -Math.PI / 2; 
-            plane.position.y = -1; 
-            plane.receiveShadow = true; 
+            plane.rotation.x = -Math.PI / 2;
+            plane.position.y = -1;
+            plane.receiveShadow = true;
             scene.add(plane);
-            
+
             lastUpdateTime = Date.now();
             lastModelAppearanceUpdateTime = Date.now();
-            lastAgeUpdateTime = Date.now(); 
-            currentStage = 'egg'; 
-            switchToStage('egg'); 
-            
+            lastAgeUpdateTime = Date.now();
+            currentStage = 'egg';
+            switchToStage('egg');
+
             updateUI();
-            addMessage("Trumpagochi è in attesa! Premi 'Avvia Gioco'!", "info");
+            addMessage("Trumpagochi is waiting! Press 'Start Game'!", "info");
 
             // Action listeners
             document.getElementById('impose-tariffs').onclick = handleImposeTariffs;
@@ -406,29 +406,29 @@
             document.getElementById('build-something').onclick = handleBuildSomething;
             document.getElementById('create-crypto').onclick = handleCreateCrypto;
             document.getElementById('pay-taxes').onclick = handlePayTaxes;
-            resetGameButton.onclick = init; 
-            startGameButton.onclick = handleStartGame; 
+            resetGameButton.onclick = init;
+            startGameButton.onclick = handleStartGame;
 
             window.addEventListener('resize', onWindowResize, false);
-            onWindowResize(); 
-            
-            if (animationFrameId) cancelAnimationFrame(animationFrameId); 
+            onWindowResize();
+
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
             animate();
             console.log("Game initialized successfully.");
         }
         let animationFrameId;
 
         function handleStartGame() {
-            if (gameStarted) return; 
+            if (gameStarted) return;
             console.log("Starting game...");
             gameStarted = true;
-            startGameButton.style.display = 'none'; 
-            enableActionButtons(true); 
-            addMessage("Il Trumpagochi si schiude!", "success");
-            switchToStage('baby'); 
-            lastAgeUpdateTime = Date.now(); 
+            startGameButton.style.display = 'none';
+            enableActionButtons(true);
+            addMessage("The Trumpagochi hatches!", "success");
+            switchToStage('baby');
+            lastAgeUpdateTime = Date.now();
             lastModelAppearanceUpdateTime = Date.now(); // Reset timer for model appearance
-            updateUI(); 
+            updateUI();
         }
 
         // --- Model Creation Functions (add group.userData = { baseY: group.position.y }; to all) ---
@@ -436,11 +436,11 @@
             const group = new THREE.Group();
             const eggGeometry = new THREE.SphereGeometry(0.8, 32, 32);
             const egg = new THREE.Mesh(eggGeometry, EGG_MATERIAL);
-            egg.scale.y = 1.4; 
+            egg.scale.y = 1.4;
             egg.castShadow = true;
             group.add(egg);
-            group.position.y = -1 + (0.8 * 1.4 / 2); 
-            group.userData = { baseY: group.position.y }; 
+            group.position.y = -1 + (0.8 * 1.4 / 2);
+            group.userData = { baseY: group.position.y };
             return group;
         }
 
@@ -448,73 +448,73 @@
             const group = new THREE.Group();
             const headSize = 0.45;
             const head = new THREE.Mesh(new THREE.SphereGeometry(headSize, 32, 32), SKIN_MATERIAL_BABY);
-            head.position.y = 0.3; 
+            head.position.y = 0.3;
             head.castShadow = true;
             group.add(head);
 
             const hairMain = new THREE.Mesh( new THREE.SphereGeometry(headSize * 0.9, 32, 16, 0, Math.PI * 2, 0, Math.PI / 1.9), HAIR_MATERIAL );
-            hairMain.scale.set(1.25, 0.9, 1.1); 
-            hairMain.position.set(0, headSize * 0.45, 0); 
-            hairMain.rotation.y = -Math.PI / 12; 
+            hairMain.scale.set(1.25, 0.9, 1.1);
+            hairMain.position.set(0, headSize * 0.45, 0);
+            hairMain.rotation.y = -Math.PI / 12;
             hairMain.rotation.x = -Math.PI / 10;
             hairMain.castShadow = true;
-            head.add(hairMain); 
-            hairMain.userData = { baseY: hairMain.position.y }; 
+            head.add(hairMain);
+            hairMain.userData = { baseY: hairMain.position.y };
 
             const body = new THREE.Mesh(new THREE.SphereGeometry(0.5, 32, 32), SKIN_MATERIAL_BABY);
-            body.position.y = -0.25; 
-            body.scale.set(1.1, 0.9, 1.1); 
+            body.position.y = -0.25;
+            body.scale.set(1.1, 0.9, 1.1);
             body.castShadow = true;
             group.add(body);
 
-            const diaper = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 0.4, 32), DIAPER_MATERIAL); 
-            diaper.position.y = body.position.y - 0.1; 
+            const diaper = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.45, 0.4, 32), DIAPER_MATERIAL);
+            diaper.position.y = body.position.y - 0.1;
             diaper.castShadow = true;
             group.add(diaper);
 
             const pacifierGroup = new THREE.Group();
             const pacifierBody = new THREE.Mesh(new THREE.CylinderGeometry(0.07, 0.07, 0.08, 16), PACIFIER_MATERIAL_BODY);
-            pacifierBody.rotation.x = Math.PI / 2; 
-            pacifierBody.position.z = headSize * 0.4; 
+            pacifierBody.rotation.x = Math.PI / 2;
+            pacifierBody.position.z = headSize * 0.4;
             pacifierGroup.add(pacifierBody);
             const pacifierShield = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 0.03, 16), PACIFIER_MATERIAL_BODY);
             pacifierShield.rotation.x = Math.PI / 2;
             pacifierShield.position.z = headSize * 0.35;
             pacifierGroup.add(pacifierShield);
             const pacifierHandle = new THREE.Mesh(new THREE.TorusGeometry(0.05, 0.015, 8, 16), PACIFIER_MATERIAL_HANDLE);
-            pacifierHandle.position.z = headSize * 0.5; 
+            pacifierHandle.position.z = headSize * 0.5;
             pacifierHandle.rotation.y = Math.PI /2;
             pacifierGroup.add(pacifierHandle);
-            pacifierGroup.position.set(0, -headSize * 0.2, 0); 
+            pacifierGroup.position.set(0, -headSize * 0.2, 0);
             head.add(pacifierGroup);
 
-            group.position.y = -1 - (-0.55); 
+            group.position.y = -1 - (-0.55);
             group.userData = { baseY: group.position.y };
             return group;
         }
 
          function createBoyGroup() {
             const group = new THREE.Group();
-            const headSize = 0.4; 
+            const headSize = 0.4;
             const head = new THREE.Mesh(new THREE.SphereGeometry(headSize, 32, 32), SKIN_MATERIAL_BOY);
-            head.position.y = 0.4; 
+            head.position.y = 0.4;
             head.castShadow = true;
             group.add(head);
             const hair = new THREE.Mesh(new THREE.SphereGeometry(headSize * 1.0, 32, 16, 0, Math.PI * 2, 0, Math.PI/1.8), HAIR_MATERIAL);
-            hair.position.y = head.position.y + headSize * 0.2; 
+            hair.position.y = head.position.y + headSize * 0.2;
             hair.scale.set(1.1, 0.7, 1.0);
             hair.rotation.x = -0.05; hair.castShadow = true;
             group.add(hair);
             hair.userData = { baseY: hair.position.y };
-            const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.4, 1.0, 32), SUIT_MATERIAL); 
-            torso.position.y = -0.3; 
+            const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.4, 1.0, 32), SUIT_MATERIAL);
+            torso.position.y = -0.3;
             torso.castShadow = true;
             group.add(torso);
             const tieGeometry = new THREE.BoxGeometry(0.1, 0.4, 0.08);
             const tie = new THREE.Mesh(tieGeometry, TIE_MATERIAL);
             tie.position.set(0, torso.position.y + 0.1, 0.2); tie.castShadow = true;
             group.add(tie);
-            group.position.y = -1 - (-0.8); 
+            group.position.y = -1 - (-0.8);
             group.userData = { baseY: group.position.y };
             return group;
         }
@@ -523,44 +523,44 @@
             const group = new THREE.Group();
             const headSize = 0.5;
             const head = new THREE.Mesh(new THREE.SphereGeometry(headSize, 32, 32), SKIN_MATERIAL_ADULT);
-            head.position.y = 0.5; 
+            head.position.y = 0.5;
             head.castShadow = true;
             group.add(head);
             const hair = new THREE.Mesh(new THREE.SphereGeometry(headSize * 0.9, 32, 16, 0, Math.PI * 2, 0, Math.PI/1.5), HAIR_MATERIAL);
-            hair.position.y = head.position.y + headSize * 0.3; 
-            hair.scale.set(1.2, 0.8, 1.0); 
+            hair.position.y = head.position.y + headSize * 0.3;
+            hair.scale.set(1.2, 0.8, 1.0);
             hair.rotation.x = -0.1; hair.castShadow = true;
             group.add(hair);
             hair.userData = { baseY: hair.position.y };
             const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.3, 0.6, 1.2, 32), SUIT_MATERIAL);
-            torso.position.y = -0.4; 
+            torso.position.y = -0.4;
             torso.castShadow = true;
             group.add(torso);
             const tieGeometry = new THREE.BoxGeometry(0.15, 0.6, 0.1);
             const tie = new THREE.Mesh(tieGeometry, TIE_MATERIAL);
-            tie.position.set(0, torso.position.y + 0.2, 0.28); tie.castShadow = true; 
+            tie.position.set(0, torso.position.y + 0.2, 0.28); tie.castShadow = true;
             group.add(tie);
-            group.position.y = -1 - (-1.0); 
+            group.position.y = -1 - (-1.0);
             group.userData = { baseY: group.position.y };
             return group;
         }
 
         function createOldGroup() {
-            const group = new THREE.Group(); 
+            const group = new THREE.Group();
             const headSize = 0.45;
             const head = new THREE.Mesh(new THREE.SphereGeometry(headSize, 32, 32), SKIN_MATERIAL_OLD);
-            head.position.y = 0.45; 
+            head.position.y = 0.45;
             head.castShadow = true;
             group.add(head);
             const hair = new THREE.Mesh(new THREE.SphereGeometry(headSize * 1.1, 32, 16, 0, Math.PI * 2, 0, Math.PI/1.3), HAIR_MATERIAL);
-            hair.position.y = head.position.y + headSize * 0.4; 
+            hair.position.y = head.position.y + headSize * 0.4;
             hair.scale.set(1.3, 0.9, 1.1);
-            hair.rotation.x = -0.2; hair.rotation.z = 0.1; hair.castShadow = true; 
+            hair.rotation.x = -0.2; hair.rotation.z = 0.1; hair.castShadow = true;
             group.add(hair);
             hair.userData = { baseY: hair.position.y };
             const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.5, 1.1, 32), SUIT_MATERIAL);
-            torso.position.y = -0.35; 
-            torso.rotation.z = 0.05; torso.castShadow = true; 
+            torso.position.y = -0.35;
+            torso.rotation.z = 0.05; torso.castShadow = true;
             group.add(torso);
             const tieGeometry = new THREE.BoxGeometry(0.15, 0.5, 0.1);
             const tie = new THREE.Mesh(tieGeometry, TIE_MATERIAL);
@@ -570,34 +570,34 @@
             cane.position.set(0.5, torso.position.y - 0.4, 0);
             cane.rotation.z = -0.2; cane.castShadow = true;
             group.add(cane);
-            group.position.y = -1 - (-0.9); 
+            group.position.y = -1 - (-0.9);
             group.userData = { baseY: group.position.y };
             return group;
         }
 
          function createGodGroup() {
             const group = new THREE.Group();
-            const headSize = 0.6; 
+            const headSize = 0.6;
             const head = new THREE.Mesh(new THREE.SphereGeometry(headSize, 32, 32), SKIN_MATERIAL_GOD);
-            head.position.y = 0.7; 
+            head.position.y = 0.7;
             head.castShadow = true;
             group.add(head);
-            const hair = new THREE.Mesh(new THREE.SphereGeometry(headSize * 1.0, 32, 16, 0, Math.PI * 2, 0, Math.PI/1.5), HAIR_MATERIAL); 
-            hair.position.y = head.position.y + headSize * 0.3; 
+            const hair = new THREE.Mesh(new THREE.SphereGeometry(headSize * 1.0, 32, 16, 0, Math.PI * 2, 0, Math.PI/1.5), HAIR_MATERIAL);
+            hair.position.y = head.position.y + headSize * 0.3;
             hair.scale.set(1.3, 0.9, 1.1);
             hair.rotation.x = -0.1; hair.castShadow = true;
             group.add(hair);
             hair.userData = { baseY: hair.position.y };
-            const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.8, 1.5, 32), SKIN_MATERIAL_GOD); 
-            torso.position.y = -0.3; 
+            const torso = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.8, 1.5, 32), SKIN_MATERIAL_GOD);
+            torso.position.y = -0.3;
             torso.castShadow = true;
             group.add(torso);
             const haloGeometry = new THREE.TorusGeometry(0.8, 0.1, 16, 100);
             const halo = new THREE.Mesh(haloGeometry, HALO_MATERIAL);
-            halo.position.y = head.position.y + headSize + 0.3; 
-            halo.rotation.x = Math.PI / 2; 
+            halo.position.y = head.position.y + headSize + 0.3;
+            halo.rotation.x = Math.PI / 2;
             group.add(halo);
-            group.position.y = -1 - (-1.05); 
+            group.position.y = -1 - (-1.05);
             group.userData = { baseY: group.position.y };
             return group;
         }
@@ -606,17 +606,17 @@
             const group = new THREE.Group();
             const stoneHeight = 3;
             const stone = new THREE.Mesh(new THREE.BoxGeometry(1.5, stoneHeight, 1), TOMBSTONE_MATERIAL);
-            stone.position.y = stoneHeight/2; 
+            stone.position.y = stoneHeight/2;
             stone.castShadow = true;
             group.add(stone);
             const topDetail = new THREE.Mesh(new THREE.BoxGeometry(1.6, 0.3, 1.1), TOMBSTONE_TOP_MATERIAL);
             topDetail.position.y = stone.position.y + stoneHeight/2 + 0.3/2;
             topDetail.castShadow = true;
             group.add(topDetail);
-            const namePlate = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 0.1), HAIR_MATERIAL); 
-            namePlate.position.set(0, stone.position.y + 0.5, 0.51); 
+            const namePlate = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.3, 0.1), HAIR_MATERIAL);
+            namePlate.position.set(0, stone.position.y + 0.5, 0.51);
             group.add(namePlate);
-            group.position.y = -1; 
+            group.position.y = -1;
             group.userData = { baseY: group.position.y };
             return group;
         }
@@ -641,7 +641,7 @@
                         else obj.material.dispose();
                     }
                 });
-                trumpModel = null; 
+                trumpModel = null;
             }
 
             let newModelInstance;
@@ -650,23 +650,23 @@
             if (newStage.startsWith("arrested")) { // Special handling for arrested state
                 // No 3D model for arrested state, just image and message
                 newModelInstance = null; // Explicitly no model
-                evolutionMessage = "ARRESTATO! Evasione Fiscale!";
+                evolutionMessage = "ARRESTED! Tax Evasion!";
                 if(arrestedImageUI) arrestedImageUI.classList.remove('hidden');
                 if(canvasContainer) canvasContainer.style.display = 'none'; // Hide canvas
             } else {
                  if(arrestedImageUI) arrestedImageUI.classList.add('hidden'); // Ensure arrested image is hidden
                  if(canvasContainer) canvasContainer.style.display = 'block'; // Ensure canvas is visible
                 switch (newStage) {
-                    case 'egg': newModelInstance = createEggGroup(); evolutionMessage = "Il Trumpagochi è... un uovo!"; break;
-                    case 'baby': newModelInstance = createBabyGroup(); evolutionMessage = "Il Trumpagochi si schiude! È un Neonato!"; break;
-                    case 'boy': newModelInstance = createBoyGroup(); evolutionMessage = "Il Trumpagochi è diventato un Ragazzo!"; break;
-                    case 'adult': newModelInstance = createAdultGroup(); evolutionMessage = "Il Trumpagochi è diventato un Adulto!"; break;
-                    case 'old': newModelInstance = createOldGroup(); evolutionMessage = "Il Trumpagochi è diventato Anziano!"; break;
-                    case 'god': newModelInstance = createGodGroup(); evolutionMessage = "Il Trumpagochi ha raggiunto l'età divina! È diventato un DIO!"; break;
-                    case 'tombstone': newModelInstance = createTombstoneGroup(); evolutionMessage = "Il Trumpagochi riposa... in un GRANDE grattacielo."; break;
-                        camera.position.set(0, 2, 5); 
+                    case 'egg': newModelInstance = createEggGroup(); evolutionMessage = "The Trumpagochi is... an egg!"; break;
+                    case 'baby': newModelInstance = createBabyGroup(); evolutionMessage = "The Trumpagochi hatches! It's a Newborn!"; break;
+                    case 'boy': newModelInstance = createBoyGroup(); evolutionMessage = "The Trumpagochi has become a Boy!"; break;
+                    case 'adult': newModelInstance = createAdultGroup(); evolutionMessage = "The Trumpagochi has become an Adult!"; break;
+                    case 'old': newModelInstance = createOldGroup(); evolutionMessage = "The Trumpagochi has become Old!"; break;
+                    case 'god': newModelInstance = createGodGroup(); evolutionMessage = "The Trumpagochi has reached divine age! It has become a GOD!"; break;
+                    case 'tombstone': newModelInstance = createTombstoneGroup(); evolutionMessage = "The Trumpagochi rests... in a BIG skyscraper."; break;
+                        camera.position.set(0, 2, 5);
                         camera.lookAt(0, 1.5, 0);
-                    default: newModelInstance = createEggGroup(); evolutionMessage = "Errore di stadio, tornando all'uovo.";
+                    default: newModelInstance = createEggGroup(); evolutionMessage = "Stage error, returning to egg.";
                 }
             }
 
@@ -678,9 +678,9 @@
                 console.error("MODEL CREATION FAILED for stage:", newStage);
                 trumpModel = createEggGroup(); // Fallback to egg
                 scene.add(trumpModel);
-                evolutionMessage = "Errore caricamento modello, tornando all'uovo.";
+                evolutionMessage = "Model loading error, returning to egg.";
             }
-            
+
             const oldStage = currentStage;
             currentStage = newStage;
             console.log(`Switch from ${oldStage} to ${currentStage} successful.`);
@@ -689,20 +689,20 @@
 
             if (evolutionMessage) {
                 let messageType = "info";
-                if (newStage === 'tombstone' || newStage.startsWith("arrested") || (newStage === 'egg' && evolutionMessage.includes("Errore"))) {
-                    messageType = "error"; 
+                if (newStage === 'tombstone' || newStage.startsWith("arrested") || (newStage === 'egg' && evolutionMessage.includes("Error"))) {
+                    messageType = "error";
                 } else if (newStage === 'god' || (newStage === 'baby' && oldStage === 'egg')) {
                     messageType = "success";
                 }
                 addMessage(evolutionMessage, messageType);
             }
-            updateUI(); 
+            updateUI();
             onWindowResize();
         }
 
 
         function checkEvolution() {
-            if (gameOver || !gameStarted || currentStage === 'god' || currentStage.startsWith("arrested")) return; 
+            if (gameOver || !gameStarted || currentStage === 'god' || currentStage.startsWith("arrested")) return;
 
             let evolved = false;
             if (currentStage === 'baby' && stats.age >= evolutionThresholds.boy) {
@@ -713,14 +713,14 @@
                 switchToStage('old'); evolved = true;
             } else if (currentStage === 'old' && stats.age >= evolutionThresholds.god) {
                  switchToStage('god');
-                 stats.ego = maxStats.ego; stats.approval = maxStats.approval; stats.wealth = maxStats.wealth * 2; 
+                 stats.ego = maxStats.ego; stats.approval = maxStats.approval; stats.wealth = maxStats.wealth * 2;
                  stats.internationalRelations = maxStats.internationalRelations; stats.taxSuspicion = maxStats.taxSuspicion;
-                 enableActionButtons(false); 
-                 addMessage("HAI TRASFORMATO IL TRUMPAGOCHI IN UN DIO!", "success");
+                 enableActionButtons(false);
+                 addMessage("YOU HAVE TURNED TRUMPAGOCHI INTO A GOD!", "success");
                  evolved = true;
             }
              if (evolved) {
-                 console.log("Evoluzione avvenuta! Nuovo stadio:", currentStage, "Età:", stats.age);
+                 console.log("Evolution occurred! New stage:", currentStage, "Age:", stats.age);
                  updateUI(); // Update UI immediately after evolution
              }
         }
@@ -731,14 +731,14 @@
             const headMesh = trumpModel.children.find(child => child.isMesh && child.geometry.type === 'SphereGeometry' && child.material !== HAIR_MATERIAL && child.material !== PACIFIER_MATERIAL_BODY && child.material !== PACIFIER_MATERIAL_HANDLE);
             const tieMesh = trumpModel.children.find(child => child.material === TIE_MATERIAL);
 
-            // Aggiorna colore cravatta in base alla ricchezza (solo adulto/anziano)
+            // Update tie color based on wealth (adult/old only)
             if ((currentStage === 'adult' || currentStage === 'old') && tieMesh && tieMesh.material) {
                 const wealthRatio = Math.min(1, Math.max(0, stats.wealth) / maxStats.wealth);
-                const lightness = 0.3 + wealthRatio * 0.4; // Scala da 0.3 a 0.7
-                tieMesh.material.color.setHSL(0, 1, lightness); // Rosso con luminosità variabile
+                const lightness = 0.3 + wealthRatio * 0.4; // Scale from 0.3 to 0.7
+                tieMesh.material.color.setHSL(0, 1, lightness); // Red with variable lightness
             }
 
-            // Aggiorna colore pelle in base all'Ego
+            // Update skin color based on Ego
             if (headMesh && headMesh.material) {
                 const egoRatio = stats.ego / maxStats.ego;
                 let hue = 30, saturation = 80, lightnessHead = 75; // Default Adult-like
@@ -760,99 +760,99 @@
         function animate() {
             animationFrameId = requestAnimationFrame(animate);
             const now = Date.now();
-            const deltaTime = (now - lastUpdateTime) / 1000; // valore iniziale: 1000 
-            lastUpdateTime = now; 
-            
-            if (gameOver) { // Se game over, renderizza una volta e esci o gestisci animazione finale
+            const deltaTime = (now - lastUpdateTime) / 1000;
+            lastUpdateTime = now;
+
+            if (gameOver) { // If game over, render once and exit or handle final animation
                  if (currentStage === 'tombstone' && trumpModel && trumpModel.userData && typeof trumpModel.userData.baseY === 'number') {
-                    trumpModel.rotation.y = Math.sin(now * 0.0005) * 0.02; // Leggera rotazione per la lapide
+                    trumpModel.rotation.y = Math.sin(now * 0.0005) * 0.02; // Slight rotation for the tombstone
                  }
-                 // Per lo stato arrestato, non c'è modello 3D da animare
+                 // For arrested state, there is no 3D model to animate
                  renderer.render(scene, camera);
-                 return; 
+                 return;
             }
-            
-            if (gameStarted && currentStage !== 'god') { 
-                // Decadimento statistiche
+
+            if (gameStarted && currentStage !== 'god') {
+                // Stat decay
                 stats.ego = Math.max(minStats.ego, stats.ego - EGO_DECAY_RATE * deltaTime);
                 stats.approval = Math.max(minStats.approval, stats.approval - APPROVAL_DECAY_RATE * deltaTime);
-                stats.wealth = Math.max(minStats.wealth, stats.wealth - WEALTH_DECAY_RATE * deltaTime); // La ricchezza può scendere
+                stats.wealth = Math.max(minStats.wealth, stats.wealth - WEALTH_DECAY_RATE * deltaTime); // Wealth can go down
                 stats.internationalRelations = Math.max(minStats.internationalRelations, stats.internationalRelations - RELATIONS_DECAY_RATE * deltaTime);
-                if (stats.age > 18) { // Il sospetto fiscale decade solo dopo una certa età
+                if (stats.age > 18) { // Tax suspicion decays only after a certain age
                     stats.taxSuspicion = Math.max(minStats.taxSuspicion, stats.taxSuspicion - TAX_SUSPICION_DECAY_RATE * deltaTime);
                 }
 
-                // Aggiornamento età
+                // Age update
                 if (now - lastAgeUpdateTime > ageInterval) {
                     stats.age++;
                     lastAgeUpdateTime = now;
-                    console.log("Età aumentata:", stats.age, "Stadio:", currentStage); 
-                    checkEvolution(); 
-                    updateUI(); // Aggiorna UI per età e possibile cambio stadio
+                    console.log("Age increased:", stats.age, "Stage:", currentStage);
+                    checkEvolution();
+                    updateUI(); // Update UI for age and possible stage change
                 }
 
-                // Aggiornamento aspetto modello a intervalli
+                // Update model appearance at intervals
                 if (now - lastModelAppearanceUpdateTime > modelAppearanceUpdateInterval) {
                     updateModelAppearance();
                     lastModelAppearanceUpdateTime = now;
                 }
             } else if (!gameStarted) {
-                 lastUpdateTime = Date.now(); 
+                 lastUpdateTime = Date.now();
             }
 
-            // Animazioni Idle
-            if(idleAnimation && trumpModel && currentStage !== 'tombstone' && currentStage !== 'god' && !currentStage.startsWith("arrested")) { 
-                const time = now * 0.001; 
-                let bounceAmplitude = 0.3;  // Ampiezza del rimbalzo: valore iniziale 0.05
+            // Idle Animations
+            if(idleAnimation && trumpModel && currentStage !== 'tombstone' && currentStage !== 'god' && !currentStage.startsWith("arrested")) {
+                const time = now * 0.001;
+                let bounceAmplitude = 0.3;
                 if (currentStage === 'egg') bounceAmplitude = 0.03;
 
                 if (trumpModel.userData && typeof trumpModel.userData.baseY === 'number') {
                     trumpModel.position.y = trumpModel.userData.baseY + Math.sin(time * 1.5) * bounceAmplitude;
                 }
-                trumpModel.rotation.y = Math.sin(time * 0.8) * 0.1; // Leggera rotazione Y
+                trumpModel.rotation.y = Math.sin(time * 0.8) * 0.1; // Slight Y rotation
 
                 const headMesh = trumpModel.children.find(child => child.isMesh && child.geometry.type === 'SphereGeometry' && child.material.uuid !== HAIR_MATERIAL.uuid && child.material.uuid !== PACIFIER_MATERIAL_BODY.uuid && child.material.uuid !== PACIFIER_MATERIAL_HANDLE.uuid);
                 if (headMesh) {
-                    headMesh.rotation.x = Math.sin(time * 0.3) * 0.02; // Movimento testa molto lento e ridotto : 0.02
+                    headMesh.rotation.x = Math.sin(time * 0.3) * 0.02; // Very slow and reduced head movement
 
-                    const hair = headMesh.children.find(h => h.material === HAIR_MATERIAL && h.userData && typeof h.userData.baseY === 'number') || 
+                    const hair = headMesh.children.find(h => h.material === HAIR_MATERIAL && h.userData && typeof h.userData.baseY === 'number') ||
                                  trumpModel.children.find(h => h.material === HAIR_MATERIAL && h.userData && typeof h.userData.baseY === 'number');
                     if (hair && (currentStage === 'adult' || currentStage === 'old' || currentStage === 'baby' || currentStage === 'boy')) {
                         hairBounce += 0.03 * bounceDirection;
-                        if(hairBounce > 0.05 || hairBounce < -0.05) bounceDirection *= -0; // modificare per far muovere il ciuffo val. default: -1
-                        hair.position.y = hair.userData.baseY + hairBounce; 
+                        if(hairBounce > 0.05 || hairBounce < -0.05) bounceDirection *= -0; // modify to make the tuft move. default val: -1
+                        hair.position.y = hair.userData.baseY + hairBounce;
                     }
                 }
                 const tieMesh = trumpModel.children.find(child => child.material === TIE_MATERIAL);
                 if ((currentStage === 'adult' || currentStage === 'old') && tieMesh) {
-                    tieMesh.rotation.x = Math.PI/2 + Math.sin(time * 3) * 0.1; 
+                    tieMesh.rotation.x = Math.PI/2 + Math.sin(time * 3) * 0.1;
                 }
-            } else if (currentStage === 'god' && trumpModel) { // Animazione per God
+            } else if (currentStage === 'god' && trumpModel) { // Animation for God
                 const time = now * 0.001;
                 if (trumpModel.userData && typeof trumpModel.userData.baseY === 'number') {
-                    trumpModel.position.y = trumpModel.userData.baseY + Math.sin(time * 1.5) * 0.1; // Dondolio più ampio
+                    trumpModel.position.y = trumpModel.userData.baseY + Math.sin(time * 1.5) * 0.1; // Wider sway
                 }
                 trumpModel.rotation.y = Math.sin(time * 0.8) * 0.2;
                 const haloMesh = trumpModel.children.find(child => child.material === HALO_MATERIAL);
-                if (haloMesh) haloMesh.rotation.z += 0.01; 
-                 // Pulsazione luminosità per God
-                 const emissiveIntensity = 0.5 + Math.sin(now * 0.002) * 0.3; 
+                if (haloMesh) haloMesh.rotation.z += 0.01;
+                 // Luminosity pulsation for God
+                 const emissiveIntensity = 0.5 + Math.sin(now * 0.002) * 0.3;
                  trumpModel.traverse(obj => {
                      if (obj.isMesh && obj.material && obj.material.emissive) {
                          obj.material.emissiveIntensity = emissiveIntensity;
                      }
                  });
             }
-            
-            if (!gameOver) { // Controlla solo se il gioco non è già finito
-                updateUI(); // Aggiorna le barre di progresso e i testi
-                checkGameOver(); 
+
+            if (!gameOver) { // Check only if the game is not already over
+                updateUI(); // Update progress bars and text
+                checkGameOver();
             } else {
-                 updateUI(); // Assicura che l'UI finale sia mostrata
+                 updateUI(); // Ensure the final UI is shown
             }
             renderer.render(scene, camera);
         }
-        
+
 
         function onWindowResize() {
             if (!renderer || !camera || !canvasContainer || canvasContainer.clientWidth === 0 || canvasContainer.clientHeight === 0) return;
@@ -864,7 +864,7 @@
         }
 
         function updateUI() {
-            if (!gameStarted && currentStage === 'egg') { // UI iniziale prima dell'avvio
+            if (!gameStarted && currentStage === 'egg') { // Initial UI before start
                 egoValueUI.textContent = `-/-`; egoProgressUI.style.width = `0%`;
                 approvalValueUI.textContent = `-/-`; approvalProgressUI.style.width = `0%`;
                 wealthValueUI.textContent = `-`; wealthProgressUI.style.width = `0%`;
@@ -883,14 +883,14 @@
                 taxProgressUI.style.width = `${(stats.taxSuspicion / maxStats.taxSuspicion) * 100}%`;
             }
 
-            let stageName = "Sconosciuto";
-            if (currentStage.startsWith("arrested")) stageName = "ARRESTATO";
+            let stageName = "Unknown";
+            if (currentStage.startsWith("arrested")) stageName = "ARRESTED";
             else {
                 switch(currentStage) {
-                    case 'egg': stageName = "Uovo"; break; case 'baby': stageName = "Neonato"; break;
-                    case 'boy': stageName = "Ragazzo"; break; case 'adult': stageName = "Adulto"; break;
-                    case 'old': stageName = "Anziano"; break; case 'god': stageName = "DIO"; break; 
-                    case 'tombstone': stageName = "Lapide"; break;
+                    case 'egg': stageName = "Egg"; break; case 'baby': stageName = "Newborn"; break;
+                    case 'boy': stageName = "Boy"; break; case 'adult': stageName = "Adult"; break;
+                    case 'old': stageName = "Old"; break; case 'god': stageName = "GOD"; break;
+                    case 'tombstone': stageName = "Tombstone"; break;
                 }
             }
             if (ageDisplayUI) ageDisplayUI.textContent = stats.age;
@@ -898,25 +898,25 @@
             if (ageTextNode) ageTextNode.nodeValue = ` (${stageName})`;
             else {
                 const currentAgeSpan = ageStageUI.querySelector('span');
-                if (currentAgeSpan) ageStageUI.innerHTML = `Età: <span>${stats.age}</span> (${stageName})`;
-                else ageStageUI.textContent = `Età: ${stats.age} (${stageName})`;
+                if (currentAgeSpan) ageStageUI.innerHTML = `Age: <span>${stats.age}</span> (${stageName})`;
+                else ageStageUI.textContent = `Age: ${stats.age} (${stageName})`;
             }
         }
 
         function checkGameOver() {
-            if (gameOver || currentStage === 'god') return; 
+            if (gameOver || currentStage === 'god') return;
             let reason = "";
-            if (stats.ego <= 0) reason = "Ego DISTRUTTO! Sei LICENZIATO... da te stesso!";
-            else if (stats.approval <= 0) reason = "Popolarità CROLLATA! IMPEACHMENT!";
-            else if (stats.wealth < 0 && currentStage !== 'egg' && gameStarted) reason = "BANCAROTTA! Questo non è 'The Art of the Deal'!"; // Wealth can be negative for bankruptcy
-            else if (stats.internationalRelations <= 0) reason = "Isolamento TOTALE! Nessun paese vuole più avere a che fare con te!";
+            if (stats.ego <= 0) reason = "Ego DESTROYED! You are FIRED... by yourself!";
+            else if (stats.approval <= 0) reason = "Approval CRASHED! IMPEACHMENT!";
+            else if (stats.wealth < 0 && currentStage !== 'egg' && gameStarted) reason = "BANKRUPTCY! This is not 'The Art of the Deal'!"; // Wealth can be negative for bankruptcy
+            else if (stats.internationalRelations <= 0) reason = "TOTAL Isolation! No country wants to deal with you anymore!";
             else if (stats.taxSuspicion <= 0 && stats.age >= ARREST_MIN_AGE) {
-                reason = "ARRESTATO! Evasione Fiscale!";
+                reason = "ARRESTED! Tax Evasion!";
                 gameOver = true; // Set gameOver first
                 switchToStage("arrested_tax_evasion"); // Special stage for arrest
                 // Further actions for arrest are handled in switchToStage and animate
             }
-            
+
             if (reason && !gameOver) gameOver = true; // Set gameOver if a reason occurred but not arrest
 
             if (gameOver) {
@@ -926,9 +926,9 @@
                 enableActionButtons(false);
                 resetGameButton.style.display = 'block';
                 console.log("GAME OVER! Reason:", reason, "Current stage:", currentStage);
-                
+
                 if (currentStage !== 'tombstone' && !currentStage.startsWith("arrested")) {
-                     switchToStage('tombstone'); 
+                     switchToStage('tombstone');
                 }
                 updateUI(); // Update UI one last time
             }
@@ -953,16 +953,16 @@
         }
 
         function playTrumpActionAnimation() {
-             if (!trumpModel || gameOver || currentStage === 'egg' || currentStage === 'tombstone' || currentStage === 'god' || currentStage.startsWith("arrested")) return; 
+             if (!trumpModel || gameOver || currentStage === 'egg' || currentStage === 'tombstone' || currentStage === 'god' || currentStage.startsWith("arrested")) return;
              const baseAnimationY = (trumpModel.userData && typeof trumpModel.userData.baseY === 'number') ? trumpModel.userData.baseY : trumpModel.position.y;
              const jumpHeight = 0.2; let currentJumpY = trumpModel.position.y;
              let upInterval = setInterval(() => {
                  currentJumpY += 0.05; trumpModel.position.y = currentJumpY;
-                 if (currentJumpY >= baseAnimationY + jumpHeight) { 
+                 if (currentJumpY >= baseAnimationY + jumpHeight) {
                      clearInterval(upInterval);
                      let downInterval = setInterval(() => {
                          currentJumpY -= 0.05; trumpModel.position.y = currentJumpY;
-                         if (currentJumpY <= baseAnimationY) { 
+                         if (currentJumpY <= baseAnimationY) {
                              trumpModel.position.y = baseAnimationY; clearInterval(downInterval);
                          }
                      }, 15);
@@ -972,113 +972,113 @@
 
         // --- Action Handlers ---
         function handleImposeTariffs() {
-            if (!gameStarted || gameOver || currentStage === 'god') return; 
+            if (!gameStarted || gameOver || currentStage === 'god') return;
             stats.ego = Math.min(maxStats.ego, stats.ego + 10);
-            // Effetto negativo sui rapporti internazionali, randomizzato
-            const relationsHit = 5 + Math.floor(Math.random() * 11); // Perde da 5 a 15 punti
+            // Negative effect on international relations, randomized
+            const relationsHit = 5 + Math.floor(Math.random() * 11); // Loses from 5 to 15 points
             stats.internationalRelations = Math.max(minStats.internationalRelations, stats.internationalRelations - relationsHit);
-            stats.wealth += 5; // Piccolo aumento di ricchezza
-            addMessage(`Dazi IMPOSTI! Ego +10, Ricchezza +5, Rapporti Internazionali -${relationsHit}.`, "action");
+            stats.wealth += 5; // Small wealth increase
+            addMessage(`Tariffs IMPOSED! Ego +10, Wealth +5, International Relations -${relationsHit}.`, "action");
             playTrumpActionAnimation(); updateUI(); updateModelAppearance();
         }
 
         function handleTweetStorm() {
-            if (!gameStarted || gameOver || currentStage === 'god') return; 
+            if (!gameStarted || gameOver || currentStage === 'god') return;
             stats.ego = Math.min(maxStats.ego, stats.ego + 15);
-            // Effetto probabilistico sull'Popolarità
-            if (Math.random() < 0.6) { // 60% probabilità di effetto positivo
-                const approvalGain = 5 + Math.floor(Math.random() * 6); // Guadagna da 5 a 10
+            // Probabilistic effect on Approval
+            if (Math.random() < 0.6) { // 60% probability of positive effect
+                const approvalGain = 5 + Math.floor(Math.random() * 6); // Gains from 5 to 10
                 stats.approval = Math.min(maxStats.approval, stats.approval + approvalGain);
-                addMessage(`TWEET ESPLOSIVO! La folla impazzisce! Ego +15, Popolarità +${approvalGain}.`, "action");
-            } else { // 40% probabilità di effetto negativo
-                const approvalLoss = 3 + Math.floor(Math.random() * 8); // Perde da 3 a 10
+                addMessage(`TWEET STORM! The crowd goes wild! Ego +15, Approval +${approvalGain}.`, "action");
+            } else { // 40% probability of negative effect
+                const approvalLoss = 3 + Math.floor(Math.random() * 8); // Loses from 3 to 10
                 stats.approval = Math.max(minStats.approval, stats.approval - approvalLoss);
-                addMessage(`TWEET ESPLOSIVO! Qualcuno si è offeso... Ego +15, Popolarità -${approvalLoss}.`, "action");
+                addMessage(`TWEET STORM! Someone got offended... Ego +15, Approval -${approvalLoss}.`, "action");
             }
-            stats.wealth -= 2; 
+            stats.wealth -= 2;
             playTrumpActionAnimation(); updateUI(); updateModelAppearance();
         }
 
         function handleHoldRally() {
             if (!gameStarted || gameOver || currentStage === 'god') return;
-            
-            // Determina casualmente se il comizio avrà successo (50% probabilità)
+
+            // Randomly determine if the rally is successful (50% probability)
             const isSuccessful = Math.random() < 0.5;
-            
-            // Calcola l'effetto sull'Popolarità in base al risultato
+
+            // Calculate effect on Approval based on the result
             let approvalChange;
             let message;
-            
+
             if (isSuccessful) {
-                // Incremento di Popolarità tra 2 e 10
-                approvalChange = Math.floor(Math.random() * 9) + 2; // Genera un numero tra 2 e 10
+                // Approval increase between 2 and 10
+                approvalChange = Math.floor(Math.random() * 9) + 2; // Generates a number between 2 and 10
                 stats.approval = Math.min(maxStats.approval, stats.approval + approvalChange);
                 stats.ego = Math.min(maxStats.ego, stats.ego + 5);
-                message = `COMIZIO OCEANICO! 'La più grande folla di SEMPRE!' Popolarità +${approvalChange}, Ego +5.`;
+                message = `OCEANIC RALLY! 'The biggest crowd EVER!' Approval +${approvalChange}, Ego +5.`;
             } else {
-                // Perdita di Popolarità tra 1 e 6
-                approvalChange = Math.floor(Math.random() * 6) + 1; // Genera un numero tra 1 e 6
+                // Approval loss between 1 and 6
+                approvalChange = Math.floor(Math.random() * 6) + 1; // Generates a number between 1 and 6
                 stats.approval = Math.max(0, stats.approval - approvalChange);
-                stats.ego = Math.min(maxStats.ego, stats.ego + 1); // Ego aumenta comunque un po'
-                message = `COMIZIO DELUDENTE! 'Molti posti vuoti...' Popolarità -${approvalChange}, Ego +2.`;
+                stats.ego = Math.min(maxStats.ego, stats.ego + 1); // Ego still increases a bit
+                message = `DISAPPOINTING RALLY! 'Many empty seats...' Approval -${approvalChange}, Ego +2.`;
             }
-            
-            // Costo del raduno rimane invariato
+
+            // Rally cost remains unchanged
             stats.wealth -= 8;
-            
-            // Aggiungi messaggio appropriato
+
+            // Add appropriate message
             addMessage(message, isSuccessful ? "success" : "warning");
-            
-            // Aggiorna UI e modello
+
+            // Update UI and model
             playTrumpActionAnimation();
             updateUI();
             updateModelAppearance();
         }
 
         function handlePlayGolf() {
-            if (!gameStarted || gameOver || currentStage === 'god') return; 
+            if (!gameStarted || gameOver || currentStage === 'god') return;
             stats.ego = Math.min(maxStats.ego, stats.ego + 5);
-            stats.wealth -= 5; 
-            stats.internationalRelations = Math.min(maxStats.internationalRelations, stats.internationalRelations + 2); // Piccolo boost ai rapporti
-            addMessage("Partita a GOLF! 'Ho vinto! Di nuovo.' Ego +5, Rapporti +2.", "action");
+            stats.wealth -= 5;
+            stats.internationalRelations = Math.min(maxStats.internationalRelations, stats.internationalRelations + 2); // Small relations boost
+            addMessage("Round of GOLF! 'I won! Again.' Ego +5, Relations +2.", "action");
             playTrumpActionAnimation(); updateUI(); updateModelAppearance();
         }
 
         function handleCriticizeMedia() {
     if (!gameStarted || gameOver || currentStage === 'god') return;
-    
-    // Determina casualmente se la critica ai media avrà successo (50% probabilità)
+
+    // Randomly determine if criticizing the media is successful (50% probability)
     const isSuccessful = Math.random() < 0.5;
-    
+
     if (isSuccessful) {
-        // Caso positivo
-        // Piccolo incremento dell'ego (+2)
+        // Positive case
+        // Small ego increase (+2)
         stats.ego = Math.min(maxStats.ego, stats.ego + 2);
-        
-        // Popolarità aumenta di un valore casuale tra 3 e 10
-        const approvalGain = Math.floor(Math.random() * 8) + 3; // Genera un numero tra 3 e 10
+
+        // Approval increases by a random value between 3 and 10
+        const approvalGain = Math.floor(Math.random() * 8) + 3; // Generates a number between 3 and 10
         stats.approval = Math.min(maxStats.approval, stats.approval + approvalGain);
-        
-        // Costo pari a 2 (ricchezza cala di 2)
+
+        // Cost of 2 (wealth drops by 2)
         stats.wealth = Math.max(minStats.wealth, stats.wealth - 2);
-        
-        addMessage(`Media SCONFITTI! La gente apprezza la tua franchezza! Ego +2, Popolarità +${approvalGain}, Ricchezza -2.`, "success");
+
+        addMessage(`Media DEFEATED! People appreciate your frankness! Ego +2, Approval +${approvalGain}, Wealth -2.`, "success");
     } else {
-        // Caso negativo
-        // Calo di ego di un valore casuale tra 3 e 9
-        const egoLoss = Math.floor(Math.random() * 7) + 3; // Genera un numero tra 3 e 9
+        // Negative case
+        // Ego drops by a random value between 3 and 9
+        const egoLoss = Math.floor(Math.random() * 7) + 3; // Generates a number between 3 and 9
         stats.ego = Math.max(minStats.ego, stats.ego - egoLoss);
-        
-        // Calo di popolarità di un valore casuale tra 3 e 9
-        const approvalLoss = Math.floor(Math.random() * 7) + 3; // Genera un numero tra 3 e 9
+
+        // Approval drops by a random value between 3 and 9
+        const approvalLoss = Math.floor(Math.random() * 7) + 3; // Generates a number between 3 and 9
         stats.approval = Math.max(minStats.approval, stats.approval - approvalLoss);
-        
-        // Costo più elevato pari a 4 (paga una multa)
+
+        // Higher cost of 4 (pay a fine)
         stats.wealth = Math.max(minStats.wealth, stats.wealth - 4);
-        
-        addMessage(`I Media si VENDICANO! Devi pagare per diffamazione! Ego -${egoLoss}, Popolarità -${approvalLoss}, Ricchezza -4.`, "warning");
+
+        addMessage(`The Media REVENGE! You have to pay for defamation! Ego -${egoLoss}, Approval -${approvalLoss}, Wealth -4.`, "warning");
     }
-    
+
     playTrumpActionAnimation();
     updateUI();
     updateModelAppearance();
@@ -1086,54 +1086,54 @@
 
         function handleBuildSomething() {
             if (!gameStarted || gameOver || currentStage === 'god') return;
-            
-            // Costo casuale tra 10 e 25
+
+            // Random cost between 10 and 25
             const constructionCost = Math.floor(Math.random() * 16) + 10;
-            
-            // Verifica se ci sono abbastanza soldi
+
+            // Check if there's enough money
             if (stats.wealth < constructionCost) {
-                addMessage(`Non hai abbastanza soldi per costruire! (Servono ${constructionCost})`, "error");
+                addMessage(`You don't have enough money to build! (Need ${constructionCost})`, "error");
                 return;
             }
-            
-            // Prima sottrai il costo di costruzione
+
+            // First subtract the construction cost
             stats.wealth -= constructionCost;
-            
-            // Determina se il progetto ha successo (50% probabilità)
+
+            // Determine if the project is successful (50% probability)
             const isSuccessful = Math.random() < 0.5;
-            
+
             if (isSuccessful) {
-                // Risultato positivo
-                // Guadagno: tra 1 e 10 + costo già sostenuto
+                // Positive result
+                // Gain: between 1 and 10 + cost already incurred
                 const profit = Math.floor(Math.random() * 10) + 1 + constructionCost;
                 stats.wealth += profit;
-                
-                // Aumento di Popolarità tra 2 e 10
+
+                // Approval increase between 2 and 10
                 const approvalGain = Math.floor(Math.random() * 9) + 2;
                 stats.approval = Math.min(maxStats.approval, stats.approval + approvalGain);
-                
-                // Ego sale del valore di Popolarità + guadagno netto
+
+                // Ego increases by the value of Approval + net gain
                 const netProfit = profit - constructionCost;
                 const egoGain = approvalGain + netProfit;
                 stats.ego = Math.min(maxStats.ego, stats.ego + egoGain);
 
-                //aumenta il sospetto fiscale: l'aumento del sospetto coincide con la diminuizione di TaxSuspicion (ho chiamato male la variabile)
+                // increase tax suspicion: the increase in suspicion coincides with the decrease in TaxSuspicion (I named the variable incorrectly)
                 stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion - 5);
-                
-                addMessage(`AFFARE D'ORO! Costruzione costata ${constructionCost}, guadagno di ${profit}! Popolarità +${approvalGain}, Ego +${egoGain}.`, "success");
+
+                addMessage(`GOLDEN DEAL! Construction cost ${constructionCost}, profit of ${profit}! Approval +${approvalGain}, Ego +${egoGain}.`, "success");
             } else {
-                // Risultato negativo
-                // La perdita è già avvenuta (costo di costruzione)
-                // Calo di Popolarità tra 1 e 10
+                // Negative result
+                // The loss has already occurred (construction cost)
+                // Approval drop between 1 and 10
                 const approvalLoss = Math.floor(Math.random() * 10) + 1;
                 stats.approval = Math.max(0, stats.approval - approvalLoss);
-                
-                // Ego diminuisce del valore dell'Popolarità
+
+                // Ego decreases by the value of Approval
                 stats.ego = Math.max(0, stats.ego - approvalLoss);
-                
-                addMessage(`FALLIMENTO EDILIZIO! Persi ${constructionCost} milioni di $ in un progetto disastroso. Popolarità -${approvalLoss}, Ego -${approvalLoss}.`, "warning");
+
+                addMessage(`BUILDING FAILURE! Lost ${constructionCost} million $ in a disastrous project. Approval -${approvalLoss}, Ego -${approvalLoss}.`, "warning");
             }
-            
+
             playTrumpActionAnimation();
             updateUI();
             updateModelAppearance();
@@ -1146,55 +1146,55 @@
             let message = "";
 
             if (stats.wealth < 10) {
-                addMessage("Non hai abbastanza capitale per investire in Cripto!", "error");
+                addMessage("You don't have enough capital to invest in Crypto!", "error");
                 return;
             }
 
-            if (outcome < 0.1) { // 10% Super Successo
-                wealthChange = 100 + Math.floor(Math.random() * 151); // +100 a +250
-                message = `CRIPTOMANIA! La tua valuta è TO THE MOON! Ricchezza +${wealthChange}!`;
+            if (outcome < 0.1) { // 10% Super Success
+                wealthChange = 100 + Math.floor(Math.random() * 151); // +100 to +250
+                message = `CRYPTOMANIA! Your currency is TO THE MOON! Wealth +${wealthChange}!`;
                 stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion -10);
-            } else if (outcome < 0.4) { // 30% Successo Moderato
-                wealthChange = 20 + Math.floor(Math.random() * 31);  // +20 a +50
-                message = `Investimento Cripto riuscito! Ricchezza +${wealthChange}.`;
+            } else if (outcome < 0.4) { // 30% Moderate Success
+                wealthChange = 20 + Math.floor(Math.random() * 31);  // +20 to +50
+                message = `Crypto investment successful! Wealth +${wealthChange}.`;
                 stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion -5);
-            } else if (outcome < 0.7) { // 30% Perdita Piccola
-                wealthChange = -(10 + Math.floor(Math.random() * 11)); // -10 a -20
-                message = `Fluttuazioni di mercato Cripto... Ricchezza ${wealthChange}.`;
-            } else { // 30% Disastro
-                wealthChange = -(30 + Math.floor(Math.random() * 41)); // -30 a -70
-                message = `CRIPTO-CRASH! Il mercato ti ha tradito! Ricchezza ${wealthChange}!`;
+            } else if (outcome < 0.7) { // 30% Small Loss
+                wealthChange = -(10 + Math.floor(Math.random() * 11)); // -10 to -20
+                message = `Crypto market fluctuations... Wealth ${wealthChange}.`;
+            } else { // 30% Disaster
+                wealthChange = -(30 + Math.floor(Math.random() * 41)); // -30 to -70
+                message = `CRYPTO-CRASH! The market betrayed you! Wealth ${wealthChange}!`;
             }
             stats.wealth += wealthChange;
-            stats.ego = Math.min(maxStats.ego, stats.ego + (wealthChange > 0 ? 5 : -5) ); // Ego cambia in base al successo
+            stats.ego = Math.min(maxStats.ego, stats.ego + (wealthChange > 0 ? 5 : -5) ); // Ego changes based on success
             addMessage(message, wealthChange > 0 ? "success" : "error");
             playTrumpActionAnimation(); updateUI(); updateModelAppearance();
         }
 
         function handlePayTaxes() {
             if (!gameStarted || gameOver || currentStage === 'god') return;
-            const taxAmount = Math.max(10, Math.floor(stats.wealth * 0.15)); // Paga il 15% della ricchezza o almeno 10
-            if (stats.wealth < taxAmount && stats.wealth > 0) { // Non abbastanza per pagare tutto ma ha qualcosa
-                 addMessage(`Vuoi pagare ${taxAmount} di tasse, ma hai solo ${stats.wealth}. Paghi tutto.`, "action");
+            const taxAmount = Math.max(10, Math.floor(stats.wealth * 0.15)); // Pay 15% of wealth or at least 10
+            if (stats.wealth < taxAmount && stats.wealth > 0) { // Not enough to pay everything but has something
+                 addMessage(`You want to pay ${taxAmount} in taxes, but you only have ${stats.wealth}. You pay everything.`, "action");
                  stats.wealth = 0;
                  stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 5);
             } else if (stats.wealth <= 0) {
-                addMessage("Non hai soldi per pagare le tasse!", "error");
+                addMessage("You don't have money to pay taxes!", "error");
                 return;
             } else {
                 stats.wealth -= taxAmount;
-                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 15); // Pagare le tasse aumenta la fiducia 
-                addMessage(`Tasse PAGATE: ${taxAmount}. Il fisco è (per ora) contento. Fiducia del Fisco +15.`, "success");
+                stats.taxSuspicion = Math.min(maxStats.taxSuspicion, stats.taxSuspicion + 15); // Paying taxes increases confidence
+                addMessage(`Taxes PAID: ${taxAmount}. The tax authorities are (for now) happy. Tax Confidence +15.`, "success");
             }
-            stats.approval = Math.max(minStats.approval, stats.approval + 2); // La gente apprezza chi paga le tasse!
+            stats.approval = Math.max(minStats.approval, stats.approval + 2); // People appreciate those who pay taxes!
             playTrumpActionAnimation(); updateUI(); updateModelAppearance();
         }
-        
+
         // Initialize the game
         document.addEventListener('DOMContentLoaded', init);
 
     </script>
-    
+
     <script>
     window.addEventListener('load', () => {
         const loader = document.getElementById('loader');
