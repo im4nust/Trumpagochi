@@ -37,7 +37,7 @@ Help the Newborn to get up to GOD stages:
 
 ### GOD Trumpagochi
 
-![God Trump](God_Trump.jpg)
+![God Trump](God_Trump.png)
 
 There are also potential final stages based on game over conditions:
 
