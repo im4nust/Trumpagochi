@@ -2,12 +2,12 @@
 
 Trumpagochi is a quirky virtual pet game where you take care of and guide the evolution of a character inspired by Donald Trump. Keep his stats balanced and make strategic decisions to see him evolve from an egg to potentially becoming a GOD!
 
-You can immediately play the game at: [Trumpagochi](www.Trumpagochi.infi.uk)
+You can immediately play the game at: [Trumpagochi](http://www.trumpagochi.infy.uk/)
 
 
 ## How to Play
 
-1.  Open the `index.html` file in your web browser or go to: [Trumpagochi](www.Trumpagochi.infi.uk).
+1.  Open the `index.html` file in your web browser or go to: [Trumpagochi](http://www.trumpagochi.infy.uk/).
 2.  Click the "Start Game" button to hatch your Trumpagochi egg.
 3.  Monitor the stats displayed on the right side of the screen:
     * **Ego:** Represents his self-esteem and confidence.
@@ -33,11 +33,11 @@ Help the Newborn to get up to GOD stages:
 
 ### Newborn Trumpagochi
 
-![Newborn Trump](uploaded:baby_trump.webp-a0568624-4309-4b1e-b90a-cc20bee42d55)
+![Newborn Trump](baby_trump.webp)
 
 ### GOD Trumpagochi
 
-![God Trump](uploaded:God_Trump.jpg-9ff32884-41ad-43ae-84d0-52ee8c3e13d5)
+![God Trump](God_Trump.jpg)
 
 There are also potential final stages based on game over conditions:
 
